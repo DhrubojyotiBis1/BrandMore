@@ -42,6 +42,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pin" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CC4-qB-7SR">
                                                 <rect key="frame" x="0.0" y="61.5" width="272" height="28"/>
                                                 <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="KRL-k4-bnk">
@@ -167,11 +168,28 @@
                         <outlet property="passwordTextView" destination="q0B-Ui-nta" id="lff-Je-82T"/>
                         <outlet property="pinTextView" destination="CC4-qB-7SR" id="eLC-30-6Gm"/>
                         <segue destination="wfT-of-EGw" kind="show" identifier="goToLogin" id="kDE-G7-P8e"/>
+                        <segue destination="3SS-Of-RwQ" kind="show" identifier="goToHome" id="3a6-TS-rbF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="52.5" y="26.25"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Q2y-AR-5xD">
+            <objects>
+                <viewController id="efd-oZ-F0E" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cce-aT-hMn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Qu9-j7-Ygy"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="cRN-gS-QLR"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t8B-V8-9ir" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2351.25" y="-67.5"/>
         </scene>
         <!--Login-->
         <scene sceneID="pzh-RB-bKd">
@@ -291,6 +309,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RKW-4j-mYn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="52.5" y="-743.75"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MH6-wc-37p">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3SS-Of-RwQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VOt-ZL-ZBZ">
+                        <rect key="frame" x="0.0" y="20" width="320" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="efd-oZ-F0E" kind="relationship" relationship="rootViewController" id="bge-MM-BVP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CBE-eU-2GX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1286" y="90"/>
         </scene>
     </scenes>
     <resources>

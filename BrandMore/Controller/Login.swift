@@ -9,7 +9,7 @@
 import UIKit
 
 class Login: UIViewController,UITextFieldDelegate {
-
+    
     //MARK:- Global variable
     @IBOutlet var outSide: UIView!
     @IBOutlet weak var passwordTextView: UITextField!
@@ -21,7 +21,7 @@ class Login: UIViewController,UITextFieldDelegate {
     //MARK:- Initial
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         //TODO: Delegate here:
         passwordTextView.delegate = self
@@ -60,5 +60,5 @@ class Login: UIViewController,UITextFieldDelegate {
         loginButton.layer.cornerRadius = 10
         whiteBackground.layer.cornerRadius = 20
     }
-
+    
 }

@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class CreateNewUser: UIViewController,UITextFieldDelegate {
-
-
+    
+    
     //MARK:- Global Variable:
     @IBOutlet var outSide: UIView!
     @IBOutlet weak var conformPasswordTextView: UITextField!
@@ -21,11 +22,24 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var loginWhiteBackground: UIView!
     @IBOutlet weak var createAcountButton: UIButton!
+    //MARK:- Initial
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if(getData()){
+            self.view.isHidden = true
+        }
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        if(getData()){
+            goToHome()
+        }
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //MARK:- Initial
         //TODO: All delegate here:
         
         conformPasswordTextView.delegate = self
@@ -53,11 +67,69 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
     
     
     @IBAction func createNewAccountButtonPressed(_ sender: Any) {
+        let name = nameTextView.text!
+        let password = passwordTextView.text!
+        let conformPassword = conformPasswordTextView.text!
+        let email = emailTextVlew.text!
+        let pin = pinTextView.text!
+        
+        let rightPassword = checkPassword(password: password, conformPassword: conformPassword)
+        if(rightPassword){
+            storeData(name: name, password: password, email: email, pin: pin)
+            goToHome()
+        }else{
+            print("Password didn't match")
+        }
+        
     }
     
     
     
     //MARK:- Function:
+    
+    func checkPassword(password:String,conformPassword:String)->Bool{
+        if (password == conformPassword){
+            return true
+        }
+        return false
+    }
+    
+    func storeData(name:String,password:String,email:String,pin:String){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let user = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
+        user.setValue(name, forKey: "name")
+        user.setValue(password, forKey: "password")
+        user.setValue(email, forKey: "email")
+        user.setValue(pin, forKey: "pin")
+        do{
+            print("Saved")
+            try context.save()
+        }catch{
+            print("error")
+        }
+    }
+    func goToHome(){
+        self.performSegue(withIdentifier: "goToHome", sender: self)
+    }
+    
+    func getData()->Bool{
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        request.returnsObjectsAsFaults = false
+        do{
+            let results = try context.fetch(request)
+            if(results.count>0){
+                return true
+            }
+        }catch{
+            print("NotLogin")
+        }
+        
+        return false
+    }
+    
     @objc func tappedOutSide(){
         conformPasswordTextView.endEditing(true)
         passwordTextView.endEditing(true)
@@ -67,10 +139,10 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
     }
     
     func makeRoundCorner(){
-    //Function that makes the corner of the button and the white background of the page round with a given radiuus
-    loginWhiteBackground.layer.cornerRadius = 20
-    createAcountButton.layer.cornerRadius = 10
-    loginButton.layer.cornerRadius = 10
+        //Function that makes the corner of the button and the white background of the page round with a given radiuus
+        loginWhiteBackground.layer.cornerRadius = 20
+        createAcountButton.layer.cornerRadius = 10
+        loginButton.layer.cornerRadius = 10
     }
 }
 
