@@ -76,9 +76,11 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
         let rightPassword = checkPassword(password: password, conformPassword: conformPassword)
         if(rightPassword){
             storeData(name: name, password: password, email: email, pin: pin)
+            sendDataToDataBase()
             goToHome()
         }else{
             print("Password didn't match")
+            //TODO: show an alart that somethis is wrong
         }
         
     }
@@ -93,8 +95,12 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
         }
         return false
     }
+    func sendDataToDataBase(){
+        //TODO: send the data to the remote database
+    }
     
     func storeData(name:String,password:String,email:String,pin:String){
+        //Function that store data to the local database
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let user = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
@@ -114,6 +120,7 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
     }
     
     func getData()->Bool{
+        //Function that gets the data from the local database
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
@@ -145,4 +152,3 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
         loginButton.layer.cornerRadius = 10
     }
 }
-

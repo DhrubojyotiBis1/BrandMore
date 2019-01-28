@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class Login: UIViewController,UITextFieldDelegate {
     
@@ -44,6 +45,8 @@ class Login: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
+        //TODO: perform the login action with data base
+        //TODO: if login success the call goToHome Function
     }
     
     
@@ -53,6 +56,11 @@ class Login: UIViewController,UITextFieldDelegate {
         passwordTextView.endEditing(true)
         emailTextView.endEditing(true)
     }
+    
+    func goToHome(){
+        performSegue(withIdentifier: "goToHome", sender: nil)
+    }
+    
     
     func makeRoundedCorner(){
         //Function that makes the corner of the button and the white background of the page round with a given radiuus
