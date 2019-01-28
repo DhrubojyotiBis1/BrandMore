@@ -90,6 +90,7 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
     //MARK:- Function:
     
     func checkPassword(password:String,conformPassword:String)->Bool{
+        //check wether password and conformPassword is same or not
         if (password == conformPassword){
             return true
         }
@@ -138,6 +139,7 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
     }
     
     @objc func tappedOutSide(){
+        //Function ends the edition of textView
         conformPasswordTextView.endEditing(true)
         passwordTextView.endEditing(true)
         nameTextView.endEditing(true)
