@@ -17,7 +17,7 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var conformPasswordTextView: UITextField!
     @IBOutlet weak var passwordTextView: UITextField!
     @IBOutlet weak var pinTextView: UITextField!
-    @IBOutlet weak var emailTextVlew: UITextField!
+    @IBOutlet weak var mobileNumberTextVlew: UITextField!
     @IBOutlet weak var nameTextView: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var loginWhiteBackground: UIView!
@@ -42,10 +42,8 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
         
         //TODO: All delegate here:
         
-        conformPasswordTextView.delegate = self
-        passwordTextView.delegate = self
         nameTextView.delegate = self
-        emailTextVlew.delegate = self
+        mobileNumberTextVlew.delegate = self
         pinTextView.delegate = self
         
         //TODO:gesture registration and creation here:
@@ -67,47 +65,32 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
     
     
     @IBAction func createNewAccountButtonPressed(_ sender: Any) {
-        let name = nameTextView.text!
-        let password = passwordTextView.text!
-        let conformPassword = conformPasswordTextView.text!
-        let email = emailTextVlew.text!
-        let pin = pinTextView.text!
-        
-        let rightPassword = checkPassword(password: password, conformPassword: conformPassword)
-        if(rightPassword){
-            storeData(name: name, password: password, email: email, pin: pin)
-            sendDataToDataBase()
-            goToHome()
-        }else{
-            print("Password didn't match")
-            //TODO: show an alart that somethis is wrong
+        let name = nameTextView.text
+        let mobileNumber = mobileNumberTextVlew.text
+        let pin = pinTextView.text
+        //TODO: check if the mobileNumber is integer of not the perform storedata
+        if(mobileNumber != "" && name != "" && pin != ""){
+            storeData(name: name!, mobileNumber: mobileNumber!, pin: pin!)
+            //TODO: call the signIn function :
+            //TODO: if signIn is sucessfull then call goToVarifire
         }
-        
-    }
+}
     
     
     
     //MARK:- Function:
     
-    func checkPassword(password:String,conformPassword:String)->Bool{
-        //check wether password and conformPassword is same or not
-        if (password == conformPassword){
-            return true
-        }
-        return false
-    }
-    func sendDataToDataBase(){
-        //TODO: send the data to the remote database
+    func signInUsingMobileNumber(){
+        //TODO: Use firebase authentication mobile number signIn feature
     }
     
-    func storeData(name:String,password:String,email:String,pin:String){
+    func storeData(name:String,mobileNumber:String,pin:String){
         //Function that store data to the local database
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let user = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
         user.setValue(name, forKey: "name")
-        user.setValue(password, forKey: "password")
-        user.setValue(email, forKey: "email")
+        user.setValue(mobileNumber, forKey: "mobilenumber")
         user.setValue(pin, forKey: "pin")
         do{
             print("Saved")
@@ -118,6 +101,10 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
     }
     func goToHome(){
         self.performSegue(withIdentifier: "goToHome", sender: self)
+    }
+    
+    func goToVarifire(){
+        self.performSegue(withIdentifier: "goToVarifire", sender: self)
     }
     
     func getData()->Bool{
@@ -140,10 +127,8 @@ class CreateNewUser: UIViewController,UITextFieldDelegate {
     
     @objc func tappedOutSide(){
         //Function ends the edition of textView
-        conformPasswordTextView.endEditing(true)
-        passwordTextView.endEditing(true)
         nameTextView.endEditing(true)
-        emailTextVlew.endEditing(true)
+        mobileNumberTextVlew.endEditing(true)
         pinTextView.endEditing(true)
     }
     

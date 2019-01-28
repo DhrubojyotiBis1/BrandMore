@@ -1,0 +1,6 @@
+framework module Pods_BrandMore {
+  umbrella header "Pods-BrandMore-umbrella.h"
+
+  export *
+  module * { export * }
+}

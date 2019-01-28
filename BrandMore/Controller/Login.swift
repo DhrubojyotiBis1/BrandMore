@@ -13,8 +13,7 @@ class Login: UIViewController,UITextFieldDelegate {
     
     //MARK:- Global variable
     @IBOutlet var outSide: UIView!
-    @IBOutlet weak var passwordTextView: UITextField!
-    @IBOutlet weak var emailTextView: UITextField!
+    @IBOutlet weak var mobileNumberTextView: UITextField!
     @IBOutlet weak var createNewAccountButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var whiteBackground: UIView!
@@ -25,8 +24,7 @@ class Login: UIViewController,UITextFieldDelegate {
         
         // Do any additional setup after loading the view.
         //TODO: Delegate here:
-        passwordTextView.delegate = self
-        emailTextView.delegate = self
+        mobileNumberTextView.delegate = self
         
         //TODO: gesture registration and creation here:
         
@@ -46,21 +44,21 @@ class Login: UIViewController,UITextFieldDelegate {
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         //TODO: perform the login action with data base
-        //TODO: if login success the call goToHome Function
+        //TODO: if login success the call goToVarifire Function
+        goToVarifire()
     }
     
     
     
     //MARK:- Function
+    
+    func goToVarifire(){
+        performSegue(withIdentifier: "goToVarifire", sender: self)
+    }
+    
     @objc func tappedOutSide(){
-        passwordTextView.endEditing(true)
-        emailTextView.endEditing(true)
-    }
-    
-    func goToHome(){
-        performSegue(withIdentifier: "goToHome", sender: nil)
-    }
-    
+        mobileNumberTextView.endEditing(true)
+    }    
     
     func makeRoundedCorner(){
         //Function that makes the corner of the button and the white background of the page round with a given radiuus
